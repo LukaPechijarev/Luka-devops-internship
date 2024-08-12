@@ -1,22 +1,22 @@
 Installing Jenkins ReadMe
 
-sudo apt update
+sudo apt udpate
 
 sudo apt install openjdk-11-jdk  #Installing jdk
 
- 
-  sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \       #Adding the key to the system
-    https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key 
+    
+  sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+    https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+  
 
-
-	    
-  echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \	# Adding Jenkins apt repo entry
+    
+  echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
     https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
     /etc/apt/sources.list.d/jenkins.list > /dev/null
-										  
-sudo apt-get udpate
-sudo apt-get install jenkins  #installing jenkins
 
-sudo systemctl start jenkins #Starting jenkins
+sudo apt-get update
+sudo apt-get install jenkins
 
- sudo more /var/lib/jenkins/secrets/initialAdminPassword   # with this command we are getting the pass for entry
+sudo systemctl start jenkins #starting jenkins
+
+sudo more /vat/lib/jenkins/secrets/initialAdminPassword #Getting the passowrd for entry
