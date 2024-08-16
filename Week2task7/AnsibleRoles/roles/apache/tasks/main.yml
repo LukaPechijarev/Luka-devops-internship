@@ -1,0 +1,21 @@
+- name: Update Apache configuration to listen on port 8081
+  lineinfile:
+    path: /etc/apache2/ports.conf
+    regexp: '^Listen 80$'
+    line: 'Listen 8081'
+    state: present
+
+- name: Update VirtualHost to use port 8081
+  template:
+    src: 000-default.conf.j2
+    dest: /etc/apache2/sites-available/000-default.conf
+
+- name: Enable Apache mod_rewrite
+  command: a2enmod rewrite
+  become: yes
+
+- name: Restart Apache to apply changes
+  service:
+    name: apache2
+    state: restarted
+

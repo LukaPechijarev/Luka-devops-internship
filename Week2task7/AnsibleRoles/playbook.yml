@@ -1,0 +1,8 @@
+- name: Configure WordPress on WSL
+  hosts: wordpress
+  become: yes
+  roles:
+    - apache
+    - mysql
+    - wordpress
+
