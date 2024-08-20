@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - "9095:80"
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - wordpress_network
+    labels:
+      - "prometheus.scrape=true"
+      - "prometheus.port=80"
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: luka123
+      MYSQL_DATABASE: database
+      MYSQL_USER: lukapechijarev
+      MYSQL_PASSWORD: luka123
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wordpress_network
+    labels:
+      - "prometheus.scrape=true"
+      - "prometheus.port=3306"
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - monitoring_network
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "4000:3000"
+    networks:
+      - monitoring_network
+    depends_on:
+      - prometheus
+
+volumes:
+  wordpress_data:
+  db_data:
+
+networks:
+  wordpress_network:
+  monitoring_network:
+
