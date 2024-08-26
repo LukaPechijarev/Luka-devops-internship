@@ -9,9 +9,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 5678
-<<<<<<< HEAD
   type: LoadBalancer
-=======
-  type: LoadBalancer 
->>>>>>> 9b1681fac7c54270905012aa04d7e5d966c32987
 
